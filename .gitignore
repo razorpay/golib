@@ -1,0 +1,16 @@
+# vendor folder
+vendor/*
+
+# idea folder created by JetBrains
+.idea/
+
+# vscode folder
+.vscode/*
+
+# tmp folder
+tmp/*
+
+# Desktop Services Store
+.DS_Store
+
+**/vendor
