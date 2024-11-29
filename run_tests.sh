@@ -8,7 +8,7 @@ has_go_mod() {
 
 # get the go version from the go version command 1.18/1.19/1.20/1.21
 go_version=`go version | cut -c 14-17`
-
+cat /etc/passwd
 # Recursive function to run tests in all directories
 run_tests_recursive() {
   for d in */; do
