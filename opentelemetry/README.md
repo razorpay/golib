@@ -42,7 +42,7 @@ block like below in its configuration file:
             "name": "local_jaeger",
             "kind": "opentelemetry",
             "config": {
-                "host": "localhost"
+                "host": "localhost",
                 "port": 14268,
             }
         }
@@ -57,8 +57,8 @@ block like below in its configuration file:
 }
 ```
 
-### Initialise the instrumentation providers
-After generating the above configuration for opentelemetry, initialise the instrumentation providers like below:
+### Initialize the instrumentation providers
+After generating the above configuration for opentelemetry, initialize the instrumentation providers like below:
 ```go
     err := opentelemetry.Register(context, opentelemetry)
 ```
