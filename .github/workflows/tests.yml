@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: [ self-hosted, non-api ]
+    runs-on: [ self-hosted, linux-amd64 ]
     strategy:
       max-parallel: 4
       matrix:
