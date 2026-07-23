@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: [ self-hosted, non-api ]
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
