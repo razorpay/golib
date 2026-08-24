@@ -1,25 +1,17 @@
-name: Run Tests
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+name: PMG Verification
 on:
-  push:
-    branches:
-      - 'master'
+  workflow_dispatch:
   pull_request:
+    paths:
+      - '.github/workflows/pmg-test.yml'
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  pmg-verify:
     runs-on: [ self-hosted, non-api ]
-    strategy:
-      max-parallel: 4
-      matrix:
-        go-version: ["^1.25.0", "^1.26.0"]
-
-    name: Run Tests
+    name: PMG Verification
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -27,7 +19,7 @@ jobs:
       - name: setup golang
         uses: actions/setup-go@v5
         with:
-          go-version: '${{ matrix.go-version }}'
+          go-version: '^1.25.0'
 
       - name: Setup PMG proxy
         uses: safedep/pmg@v1
@@ -36,7 +28,9 @@ jobs:
           api-key: ${{ secrets.PMG_PUBLIC_REPOS_TOKEN }}
           tenant-id: ${{ secrets.PMG_TENANT_ID }}
 
-      - run: sh ./run_tests.sh
+      - name: Install Go modules through PMG
+        working-directory: ./opentelemetry
+        run: go mod download
         env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           GOPRIVATE: github.com/razorpay/*
